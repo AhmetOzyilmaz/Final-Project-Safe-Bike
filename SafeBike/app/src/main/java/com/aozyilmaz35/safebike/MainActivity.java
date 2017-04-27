@@ -23,7 +23,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
     private  Animation mAnimation = new AlphaAnimation(1, 0);
 
 
-    private  Button start_button,stop_button,select;
+    private  Button start_button,stop_button,select1,select2,select3,select4;
     private EditText mOutputView;
     private EditText mInputView;
     private Button mStartButton;
@@ -75,35 +75,10 @@ public class MainActivity  extends Activity implements View.OnClickListener {
 
                  break;
             case R.id.btn_left:
-                select=(Button)findViewById(R.id.btn_left);
-                mAnimation.setDuration(200);
-                mAnimation.setInterpolator(new LinearInterpolator());
-                mAnimation.setRepeatCount(Animation.INFINITE);
-                mAnimation.setRepeatMode(Animation.REVERSE);
-                select.startAnimation(mAnimation);
-                select.setOnClickListener(new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        v.clearAnimation();
-                    }
-                });
                 break;
             case R.id.btn_right:
-                select=(Button)findViewById(R.id.btn_right);
-                mAnimation = new AlphaAnimation(1, 0);
-                mAnimation.setDuration(200);
-                mAnimation.setInterpolator(new LinearInterpolator());
-                mAnimation.setRepeatCount(Animation.INFINITE);
-                mAnimation.setRepeatMode(Animation.REVERSE);
-                select.startAnimation(mAnimation);
-                select.setOnClickListener(new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        v.clearAnimation();
-                    }
-                });
                 break;
 
 
@@ -178,9 +153,56 @@ public class MainActivity  extends Activity implements View.OnClickListener {
 
 
     private void writeMessage(String message){
-        mInputView.setText("ahmet  " +message + "\r\n" + mInputView.getText().toString());
+
+        if(message.charAt(0) == '1'){//sol sinyal aktifken
+            select1=(Button)findViewById(R.id.btn_left);
+            setAnimationButton(select1);
+        }
+        else if(message.charAt(0) == '0'){
+            select1.clearAnimation();
+        }
+
+        if(message.charAt(1)=='1'){//sağ sinyal
+            select2=(Button)findViewById(R.id.btn_right);
+            setAnimationButton(select2);
+
+        }
+        else if(message.charAt(1) == '0'){
+            select2.clearAnimation();
+        }
+        if(message.charAt(2)=='1'){//sağ sinyal
+            select3=(Button)findViewById(R.id.btn_flash);
+            setAnimationButton(select3);
+
+        }
+        else if(message.charAt(1) == '0'){
+            select3.clearAnimation();
+        }
+        if(message.charAt(3)=='1'){//sağ sinyal
+            select4=(Button)findViewById(R.id.btn_horn);
+            setAnimationButton(select4);
+
+        }
+        else if(message.charAt(3) == '0'){
+            select4.clearAnimation();
+        }
+
+        //  mInputView.setText("ahmet  " +message + "\r\n" + mInputView.getText().toString());
 
     }
+
+    private void setAnimationButton(Button btn){
+        mAnimation = new AlphaAnimation(1, 0);
+        mAnimation.setDuration(200);
+        mAnimation.setInterpolator(new LinearInterpolator());
+        mAnimation.setRepeatCount(Animation.INFINITE);
+        mAnimation.setRepeatMode(Animation.REVERSE);
+
+        btn.startAnimation(mAnimation);
+        btn.setClickable(false);
+    }
+
+
 
     private void writeError(String message){
         writeMessage("ERROR: " + message);
