@@ -10,23 +10,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_height="113dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_left"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/a4"
-             />
+            android:background="@drawable/a4" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_flash"
@@ -34,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="FLASH" />
+
             <Button
                 android:id="@+id/btn_horn"
                 android:layout_width="match_parent"
@@ -57,10 +56,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
 
         <com.aozyilmaz35.safebike.Chronometer
@@ -68,34 +65,36 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
+            android:layout_margin="10dp"
             android:clickable="false"
             android:gravity="center"
             android:orientation="vertical"
+            android:padding="10dp"
             android:text="Chronometer"
             android:textSize="30dp" />
-
 
         <TextView
             android:id="@+id/m_sure"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
+            android:padding="10dp"
             android:text="SÜRE" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_marginBottom="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/distancetext"
@@ -132,8 +131,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.32"
             android:orientation="horizontal">
 
             <TextView
@@ -165,40 +164,41 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="94dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btn_Start"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="PLAY" />
+
+        <Button
+            android:id="@+id/btn_restart"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="Restart" />
+
+        <Button
+            android:id="@+id/btn_end"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="PAUSE" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
-
-
-            <Button
-                android:id="@+id/btn_Start"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PLAY" />
-
-            <Button
-                android:id="@+id/btn_restart"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:text="Restart" />
-
-            <Button
-                android:id="@+id/btn_end"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PAUSE" />
-
-
-        </LinearLayout>
     </LinearLayout>
 
 
