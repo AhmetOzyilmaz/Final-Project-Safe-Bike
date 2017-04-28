@@ -2,19 +2,14 @@ package com.aozyilmaz35.safebike;
 
 import android.app.Activity;
 import android.os.Bundle;
-
 import android.os.SystemClock;
-
 import android.view.View;
-
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
-
-import java.io.IOException;
 
 public class MainActivity  extends Activity implements View.OnClickListener {
 
@@ -25,7 +20,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
 
     private  Button start_button,stop_button,select1,select2,select3,select4;
     private EditText mOutputView;
-    private EditText mInputView;
+   // private EditText mInputView;
     private Button mStartButton;
     private Button mStopButton;
     private Button mSendButton;
@@ -44,13 +39,14 @@ public class MainActivity  extends Activity implements View.OnClickListener {
         ((Button)findViewById(R.id.btn_left)).setOnClickListener(this);
         ((Button)findViewById(R.id.btn_right)).setOnClickListener(this);
 
-        mInputView = (EditText) findViewById(R.id.input);
-        mStartButton = (Button) findViewById(R.id.startButton);
-        mStopButton = (Button) findViewById(R.id.stopButton);
-        mSendButton = (Button) findViewById(R.id.sendButton);
+        //mInputView = (EditText) findViewById(R.id.input);
+       // mStartButton = (Button) findViewById(R.id.startButton);
+       // mStopButton = (Button) findViewById(R.id.stopButton);
+       // mSendButton = (Button) findViewById(R.id.sendButton);
 
         mBluetoothServer = new BluetoothServer();
         mBluetoothServer.setListener(mBluetoothServerListener);
+        onStartAuto();
 
     }
 
@@ -95,14 +91,14 @@ public class MainActivity  extends Activity implements View.OnClickListener {
                 @Override
                 public void onStarted() {
                     //writeMessage("*** Server has started, waiting for client connection ***");
-                    mStopButton.setEnabled(true);
-                    mStartButton.setEnabled(false);
+                  //  mStopButton.setEnabled(true);
+                  //  mStartButton.setEnabled(false);
                 }
 
                 @Override
                 public void onConnected() {
                  //   writeMessage("*** Client has connected ***");
-                    mSendButton.setEnabled(true);
+                   // mSendButton.setEnabled(true);
                 }
 
                 @Override
@@ -118,13 +114,13 @@ public class MainActivity  extends Activity implements View.OnClickListener {
                 @Override
                 public void onStopped() {
                   //  writeMessage("*** Server has stopped ***");
-                    mSendButton.setEnabled(false);
-                    mStopButton.setEnabled(false);
-                    mStartButton.setEnabled(true);
+                   // mSendButton.setEnabled(false);
+                   // mStopButton.setEnabled(false);
+                    //mStartButton.setEnabled(true);
                 }
             };
 
-    public void onStartClick(View view){
+    public void onStartAuto(){
         try {
             mBluetoothServer.start();
         } catch (BluetoothServer.BluetoothServerException e) {
@@ -132,12 +128,20 @@ public class MainActivity  extends Activity implements View.OnClickListener {
             writeError(e.getMessage());
         }
     }
+   /* public void onStartClick(View view){
+        try {
+            mBluetoothServer.start();
+        } catch (BluetoothServer.BluetoothServerException e) {
+            e.printStackTrace();
+            writeError(e.getMessage());
+        }
+    }*/
 
-    public void onStopClick(View view){
+   /* public void onStopClick(View view){
         mBluetoothServer.stop();
     }
 
-    public void onSendClick(View view){
+   /* public void onSendClick(View view){
         try {
 
             mBluetoothServer.send(mOutputView.getText().toString().getBytes());
@@ -150,7 +154,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
             writeError(e.getMessage());
         }
     }
-
+*/
 
     private void writeMessage(String message){
 

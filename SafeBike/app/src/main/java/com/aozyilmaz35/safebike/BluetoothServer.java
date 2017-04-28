@@ -121,7 +121,7 @@ public class BluetoothServer {
             // You could use something like this to ask user to enable Bluetooth
             //Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             //startActivity(enableBtIntent);
-
+            mBluetoothAdapter.enable();
             throw new BluetoothServerException("Bluetooth is disabled");
         }
 
