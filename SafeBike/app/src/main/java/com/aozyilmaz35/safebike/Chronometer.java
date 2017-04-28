@@ -10,7 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.AttributeSet;
-import android.widget.TextView;
+
 import java.text.DecimalFormat;
 
 public class Chronometer extends android.support.v7.widget.AppCompatTextView {
@@ -25,6 +25,15 @@ public class Chronometer extends android.support.v7.widget.AppCompatTextView {
     private long mBase;
     private boolean mVisible;
     private boolean mStarted;
+
+    public boolean ismRunning() {
+        return mRunning;
+    }
+
+    public void setmRunning(boolean mRunning) {
+        this.mRunning = mRunning;
+    }
+
     private boolean mRunning;
     private OnChronometerTickListener mOnChronometerTickListener;
 
@@ -77,9 +86,15 @@ public class Chronometer extends android.support.v7.widget.AppCompatTextView {
 
     public void stop() {
         mStarted = false;
+        mRunning = false;
         updateRunning();
-    }
 
+    }
+    public void pause() {
+        mStarted = true;
+        mRunning = false;
+
+    }
 
     public void setStarted(boolean started) {
         mStarted = started;

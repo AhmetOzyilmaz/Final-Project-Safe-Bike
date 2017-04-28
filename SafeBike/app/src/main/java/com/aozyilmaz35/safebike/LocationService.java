@@ -7,7 +7,6 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -107,7 +106,7 @@ public class LocationService extends Service implements LocationListener,GoogleA
             lEnd=mCurrentLocation;
         updateUI();
         speed=location.getSpeed()*18/5;
-        Toast.makeText(getApplicationContext(),"Location ::::::  "+location.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),"Location ::::::  "+location.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -131,17 +130,17 @@ public class LocationService extends Service implements LocationListener,GoogleA
            MainActivity.endTime= System.currentTimeMillis();
            long diff=MainActivity.endTime-MainActivity.startTime;
             diff= TimeUnit.MILLISECONDS.toMinutes(diff);
-            MainActivity.time.setText("Total Time: " + diff + " minutes");
+            //MainActivity.time.setText("Total Time: " + diff + " minutes");
             if(speed>0.0)
-                MainActivity.speed.setText("Current speed: " + new DecimalFormat("#.##").format(speed) + " km/hr");
+                MainActivity.speed.setText( new DecimalFormat("#.##").format(speed));
             else
-                MainActivity.speed.setText(".......");
+                MainActivity.speed.setText("...");
 
 //        Intent local = new Intent();
 //
 //        local.setAction("com.hello.action");
 //        local.putExtra("distance",distance);
-            MainActivity.dist.setText(new DecimalFormat("#.###").format(distance) + " Km's.");
+            MainActivity.dist.setText(new DecimalFormat("0.00").format(distance));
 
 
             lStart = lEnd;

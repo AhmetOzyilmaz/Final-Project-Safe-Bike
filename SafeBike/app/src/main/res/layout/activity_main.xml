@@ -123,7 +123,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="00:00"
+                android:text="0,00"
                 android:textSize="20dp" />
 
 
@@ -157,41 +157,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="HIZ" />
+                android:text="HIZ(km/s)" />
 
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-        <Button
-            android:id="@+id/btn_Start"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="PLAY" />
-
-        <Button
-            android:id="@+id/btn_restart"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:text="Restart" />
-
-        <Button
-            android:id="@+id/btn_end"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="PAUSE" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -211,36 +179,6 @@
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:padding="10dp">
-
-            <TextView
-                android:id="@+id/distancetext"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="distancetext"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/timetext"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="timetext"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/speedtext"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="00:00"
-                android:textSize="20dp" />
 
 
         </LinearLayout>

@@ -117,12 +117,13 @@ public class MainActivity  extends Activity implements View.OnClickListener {
     /****************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((Button) findViewById(R.id.btn_Start)).setOnClickListener(this);
-        ((Button) findViewById(R.id.btn_end)).setOnClickListener(this);
-        ((Button) findViewById(R.id.btn_restart)).setOnClickListener(this);
+        //((Button) findViewById(R.id.btn_Start)).setOnClickListener(this);
+       // ((Button) findViewById(R.id.btn_end)).setOnClickListener(this);
+       // ((Button) findViewById(R.id.btn_restart)).setOnClickListener(this);
         ((Button)findViewById(R.id.btn_left)).setOnClickListener(this);
         ((Button)findViewById(R.id.btn_right)).setOnClickListener(this);
 
@@ -136,13 +137,8 @@ public class MainActivity  extends Activity implements View.OnClickListener {
         onStartAuto();
 
 
-
-       // toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.tool_bar);
-       // setSupportActionBar(toolbar);
-
-        dist=(TextView)findViewById(R.id.distancetext);
-        time=(TextView)findViewById(R.id.timetext);
-        speed=(TextView)findViewById(R.id.speedtext);
+        dist=(TextView)findViewById(R.id.mDistText);
+        speed=(TextView)findViewById(R.id.mSpeedText);
 
         start=(Button)findViewById(R.id.start);
         pause=(Button)findViewById(R.id.pause);
@@ -150,9 +146,15 @@ public class MainActivity  extends Activity implements View.OnClickListener {
 
         image=(ImageView)findViewById(R.id.image);
 
+        start.setVisibility(View.VISIBLE);
+        pause.setVisibility(View.GONE);
+        stop.setVisibility(View.GONE);
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                com.aozyilmaz35.safebike.Chronometer mChronometer = (com.aozyilmaz35.safebike.Chronometer) findViewById(R.id.chronometer);
+
                 checkGps();
                 locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
                 if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -171,6 +173,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
                 pause.setText("Pause");
                 stop.setVisibility(View.VISIBLE);
 
+                mChronometer.start();
 
             }
         });
@@ -178,10 +181,24 @@ public class MainActivity  extends Activity implements View.OnClickListener {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                com.aozyilmaz35.safebike.Chronometer mChronometer = (com.aozyilmaz35.safebike.Chronometer) findViewById(R.id.chronometer);
+
+                if(mChronometer.ismRunning()== true)
+                    mChronometer.pause();
+                else{
+                    mChronometer.start();
+
+                    //mChronometer.updateText(  mChronometer.getBase() + timeWhenStopped );
+                }
+
+
                 if (pause.getText().toString().equalsIgnoreCase("pause")) {
                     pause.setText("Resume");
                     p = 1;
+                    //  mChronometer.start();
+                    //  mChronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
 
+                    mChronometer.updateText(  SystemClock.elapsedRealtime());
                 }
                 else if(pause.getText().toString().equalsIgnoreCase("Resume"))
                 {
@@ -195,10 +212,13 @@ public class MainActivity  extends Activity implements View.OnClickListener {
                     p=0;
 
                 }
+                //mChronometer.stop();
             }
         });
 
         stop.setOnClickListener(new View.OnClickListener() {
+            com.aozyilmaz35.safebike.Chronometer mChronometer = (com.aozyilmaz35.safebike.Chronometer) findViewById(R.id.chronometer);
+
             @Override
             public void onClick(View v) {
                 if(status==true)
@@ -208,7 +228,12 @@ public class MainActivity  extends Activity implements View.OnClickListener {
                 pause.setVisibility(View.GONE);
                 stop.setVisibility(View.GONE);
                 p=0;
+
+                mChronometer.stop();
+
             }
+
+
         });
 
         /****************************************************/
@@ -225,21 +250,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-       /* //noinspection SimplifiableIfStatement
-        if (id == R.id.about) {
-            Dialog dialog1=new Dialog(MainActivity.this, R.style.DialogSlideAnim1);
-            dialog1.setContentView(R.layout.dialog_help);
-            dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog1.show();
-            return true;
-        }*/
-
-        return super.onOptionsItemSelected(item);
+         return super.onOptionsItemSelected(item);
     }
 
 
@@ -278,34 +289,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
     /*****************************************************************/
         @Override
     public void onClick(View v) {
-        com.aozyilmaz35.safebike.Chronometer mChronometer = (com.aozyilmaz35.safebike.Chronometer) findViewById(R.id.chronometer);
 
-        switch (v.getId()) {
-            case R.id.btn_Start:
-                mChronometer.start();
-                break;
-            case R.id.btn_end:
-                    //Define here what happens when the Chronometer reaches the time above.
-                mChronometer.stop();
-                mChronometer.updateText(  SystemClock.elapsedRealtime());
-
-                break;
-            case R.id.btn_restart:
-
-                mChronometer.start();
-                mChronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-
-                 break;
-            case R.id.btn_left:
-
-                break;
-            case R.id.btn_right:
-
-                break;
-
-
-
-        }
 
     }
 
