@@ -17,6 +17,36 @@ public class Chronometer extends android.support.v7.widget.AppCompatTextView {
     @SuppressWarnings("unused")
 	private static final String TAG = "Chronometer";
 
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
+    }
+
+    private  int minutes = 0 ;
+    private  int hours = 0 ;
+    private  int seconds = 0 ;
+
+
+
     public interface OnChronometerTickListener {
 
         void onChronometerTick(Chronometer chronometer);
@@ -58,7 +88,9 @@ public class Chronometer extends android.support.v7.widget.AppCompatTextView {
      void init() {
         mBase = SystemClock.elapsedRealtime();
         updateText(mBase);
-    }
+        //MainActivity.cal.setText(mKal);
+
+     }
 
     public void setBase(long base) {
         mBase = base;
@@ -80,6 +112,7 @@ public class Chronometer extends android.support.v7.widget.AppCompatTextView {
     }
 
     public void start() {
+
         mStarted = true;
         updateRunning();
     }
@@ -120,13 +153,13 @@ public class Chronometer extends android.support.v7.widget.AppCompatTextView {
         
         DecimalFormat df = new DecimalFormat("00");
         
-        int hours = (int)(timeElapsed / (3600 * 1000));
+        hours = (int)(timeElapsed / (3600 * 1000));
         int remaining = (int)(timeElapsed % (3600 * 1000));
         
-        int minutes = (int)(remaining / (60 * 1000));
+          minutes = (int)(remaining / (60 * 1000));
         remaining = (int)(remaining % (60 * 1000));
         
-        int seconds = (int)(remaining / 1000);
+        seconds = (int)(remaining / 1000);
         remaining = (int)(remaining % (1000));
         
         int milliseconds = (int)(((int)timeElapsed % 1000) / 100);
@@ -142,6 +175,8 @@ public class Chronometer extends android.support.v7.widget.AppCompatTextView {
        	text += Integer.toString(milliseconds);
         
         setText(text);
+
+
     }
 
     private void updateRunning() {
@@ -156,8 +191,10 @@ public class Chronometer extends android.support.v7.widget.AppCompatTextView {
                 mHandler.removeMessages(TICK_WHAT);
             }
             mRunning = running;
+
         }
     }
+
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message m) {

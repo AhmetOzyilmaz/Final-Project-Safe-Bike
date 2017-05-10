@@ -34,6 +34,7 @@ public class LocationService extends Service implements LocationListener,GoogleA
     double speed;
 
 
+    private  int mKal = 0;
 
     private final IBinder mBinder=new LocalBinder();
 
@@ -105,7 +106,10 @@ public class LocationService extends Service implements LocationListener,GoogleA
         else
             lEnd=mCurrentLocation;
         updateUI();
+
         speed=location.getSpeed()*18/5;
+
+
         //Toast.makeText(getApplicationContext(),"Location ::::::  "+location.toString(), Toast.LENGTH_LONG).show();
     }
 
@@ -134,7 +138,7 @@ public class LocationService extends Service implements LocationListener,GoogleA
             if(speed>0.0)
                 MainActivity.speed.setText( new DecimalFormat("#.##").format(speed));
             else
-                MainActivity.speed.setText("...");
+                MainActivity.speed.setText("0.00");
 
 //        Intent local = new Intent();
 //
@@ -142,6 +146,8 @@ public class LocationService extends Service implements LocationListener,GoogleA
 //        local.putExtra("distance",distance);
             MainActivity.dist.setText(new DecimalFormat("0.00").format(distance));
 
+            mKal = (int) ((12000 * 4  * distance) / 60);
+            MainActivity.cal.setText(new DecimalFormat("0").format(mKal));
 
             lStart = lEnd;
 //        this.sendBroadcast(local);

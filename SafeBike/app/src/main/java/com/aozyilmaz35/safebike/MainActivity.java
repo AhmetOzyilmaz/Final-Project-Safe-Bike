@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity  extends Activity implements View.OnClickListener {
 
@@ -30,7 +32,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
     private  Animation mAnimation = new AlphaAnimation(1, 0);
 
 
-    private  Button start_button,stop_button,select1,select2,select3,select4;
+    private  Button start_button,stop_button,select1,select2,select3,select4,mStartMusic;
     private EditText mOutputView;
    // private EditText mInputView;
     private Button mStartButton;
@@ -45,7 +47,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
     LocationService myService;
     static boolean status;
     LocationManager locationManager;
-    static TextView dist,time,speed;
+    static TextView dist,time,speed,cal,mInput;
     Button start,pause,stop;
     static long startTime,endTime;
     ImageView image,help;
@@ -127,18 +129,18 @@ public class MainActivity  extends Activity implements View.OnClickListener {
         ((Button)findViewById(R.id.btn_left)).setOnClickListener(this);
         ((Button)findViewById(R.id.btn_right)).setOnClickListener(this);
 
-        //mInputView = (EditText) findViewById(R.id.input);
-       // mStartButton = (Button) findViewById(R.id.startButton);
-       // mStopButton = (Button) findViewById(R.id.stopButton);
-       // mSendButton = (Button) findViewById(R.id.sendButton);
 
         mBluetoothServer = new BluetoothServer();
         mBluetoothServer.setListener(mBluetoothServerListener);
         onStartAuto();
 
+       // mInput =(TextView)findViewById(R.id.mInputView);
+        mStartMusic= (Button) findViewById(R.id.startMusic);
+
 
         dist=(TextView)findViewById(R.id.mDistText);
         speed=(TextView)findViewById(R.id.mSpeedText);
+        cal=(TextView)findViewById(R.id.mKaloriText);
 
         start=(Button)findViewById(R.id.start);
         pause=(Button)findViewById(R.id.pause);
@@ -150,10 +152,13 @@ public class MainActivity  extends Activity implements View.OnClickListener {
         pause.setVisibility(View.GONE);
         stop.setVisibility(View.GONE);
 
+        final com.aozyilmaz35.safebike.Chronometer mChronometer = (com.aozyilmaz35.safebike.Chronometer) findViewById(R.id.chronometer);
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                com.aozyilmaz35.safebike.Chronometer mChronometer = (com.aozyilmaz35.safebike.Chronometer) findViewById(R.id.chronometer);
+                mChronometer.start();
+
 
                 checkGps();
                 locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -173,7 +178,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
                 pause.setText("Pause");
                 stop.setVisibility(View.VISIBLE);
 
-                mChronometer.start();
+
 
             }
         });
@@ -235,7 +240,14 @@ public class MainActivity  extends Activity implements View.OnClickListener {
 
 
         });
-
+        mStartMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.INTENT_ACTION_MUSIC_PLAYER);
+                //Toast.makeText(MainActivity.this,"AAAAAAAAAAAAAAAAAAAAAA",Toast.LENGTH_LONG).show();
+                startActivity(intent);
+            }
+        });
         /****************************************************/
 
     }
@@ -259,7 +271,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            //Toast.makeText(this, "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
 
             showGPSDisabledAlertToUser();
         }
@@ -374,7 +386,7 @@ public class MainActivity  extends Activity implements View.OnClickListener {
             select4.clearAnimation();
         }
 
-        //  mInputView.setText("ahmet  " +message + "\r\n" + mInputView.getText().toString());
+        //mInput.setText("ahmet  " +message + "\r\n" + mInput.getText().toString());
 
     }
 
