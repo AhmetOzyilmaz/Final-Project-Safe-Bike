@@ -202,9 +202,12 @@
 
         <Button
             android:id="@+id/startMusic"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="START MUSIC" />
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal|center"
+            android:layout_weight="0.55"
+            android:background="@drawable/m1"
+            android:isScrollContainer="false" />
 
     </LinearLayout>
 
