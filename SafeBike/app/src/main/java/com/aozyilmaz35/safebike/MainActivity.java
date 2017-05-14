@@ -200,8 +200,6 @@ public class MainActivity  extends Activity implements View.OnClickListener {
                 if (pause.getText().toString().equalsIgnoreCase("pause")) {
                     pause.setText("Resume");
                     p = 1;
-                    //  mChronometer.start();
-                    //  mChronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
 
                     mChronometer.updateText(  SystemClock.elapsedRealtime());
                 }
@@ -226,7 +224,9 @@ public class MainActivity  extends Activity implements View.OnClickListener {
 
             @Override
             public void onClick(View v) {
+
                 if(status==true)
+
                     unbindService();
                 start.setVisibility(View.VISIBLE);
                 pause.setText("Pause");
@@ -234,7 +234,10 @@ public class MainActivity  extends Activity implements View.OnClickListener {
                 stop.setVisibility(View.GONE);
                 p=0;
 
+
                 mChronometer.stop();
+
+                mChronometer.updateText(  mChronometer.getBase() + timeWhenStopped );
 
             }
 

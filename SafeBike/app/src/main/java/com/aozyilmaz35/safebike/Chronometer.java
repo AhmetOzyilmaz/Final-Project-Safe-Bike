@@ -120,8 +120,7 @@ public class Chronometer extends android.support.v7.widget.AppCompatTextView {
     public void stop() {
         mStarted = false;
         mRunning = false;
-        updateRunning();
-
+        setBase(SystemClock.elapsedRealtime());
     }
     public void pause() {
         mStarted = true;
